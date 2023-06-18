@@ -5,23 +5,23 @@
 # Description:  Calling './vote.sh' will query the configured RPC server for open votes and interactively walk you through the voting process.
 
 set -e
-cosmos_exec=${CHAIN_DAEMON:-kujirad}
-rpc_node=${RPC:-'https://rpc-kujira.mintthemoon.xyz:443'}
+cosmos_exec=${CHAIN_DAEMON:-kujirad} # Edit as necesssary 
+rpc_node=${RPC:-'https://rpc-kujira.mintthemoon.xyz:443'} # Edit as necesssary
 wallet=${VOTE_WALLET}
 if [[ -z "${wallet}" ]]
 then
   read -p "Enter wallet name: " wallet
 fi
-chain=${CHAIN_ID:-kaiyo-1}
-fees=${VOTE_FEES:-250ukuji}
+chain=${CHAIN_ID:-kaiyo-1} # Edit as necesssary
+fees=${VOTE_FEES:-250ukuji} # Edit as necesssary
 voter=${VOTE_ADDR:-$(${cosmos_exec} keys show -a ${wallet})}
-status_filter=${PROPOSAL_STATUS:-VotingPeriod}
+status_filter=${PROPOSAL_STATUS:-voting_period} # Edit as necesssary
 
 crad="${cosmos_exec} --node ${rpc_node}"
 
 props_to_vote_on=()
 
-props=$($crad query gov proposals --status "$status_filter" | grep "  id:" | grep -o [[:digit:]]*)
+props=$($crad query gov proposals --status "$status_filter" | grep "proposal_id:" | grep -o [[:digit:]]*) # Edit "proposal_id:" if necesssary
 [ $? -ne 0 ] && echo "No props need to be voted on!"
 echo "Finding active proposals..."
 echo "*____________________________*"
