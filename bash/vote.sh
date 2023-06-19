@@ -6,7 +6,7 @@
 
 set -e
 cosmos_exec=${CHAIN_DAEMON:-kujirad} # Edit as necesssary 
-rpc_node=${RPC:-'https://rpc-kujira.mintthemoon.xyz:443'} # Edit as necesssary
+rpc_node=${RPC:-'https://rpc.cosmos.directory:443/kujira'} # Edit as necesssary
 wallet=${VOTE_WALLET}
 if [[ -z "${wallet}" ]]
 then
