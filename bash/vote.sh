@@ -6,7 +6,7 @@
 
 set -e
 cosmos_exec=${CHAIN_DAEMON:-kujirad} # Edit as necesssary 
-rpc_node=${RPC:-'https://rpc.cosmos.directory:443/kujira'} # Edit as necesssary
+rpc_node=${RPC:-'https://rpc.cosmos.directory:443/kujira'} # Edit as desired
 wallet=${VOTE_WALLET}
 if [[ -z "${wallet}" ]]
 then
@@ -21,7 +21,7 @@ crad="${cosmos_exec} --node ${rpc_node}"
 
 props_to_vote_on=()
 
-props=$($crad query gov proposals --status "$status_filter" | grep "proposal_id:" | grep -o [[:digit:]]*) # Edit "proposal_id:" if necesssary
+props=$($crad query gov proposals --status "$status_filter" | grep " id:" | grep -o [[:digit:]]*) # Edit to "proposal_id:" for some chains
 [ $? -ne 0 ] && echo "No props need to be voted on!"
 echo "Finding active proposals..."
 echo "*____________________________*"
